@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* 1. SolaimanLipi Font Faces (Local & CDN fallback) */
+@font-face {
+  font-family: 'SolaimanLipi';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/solaimanlipi-bold-v1.0.woff2') format('woff2'),
+       url('/fonts/solaimanlipi-bold-v1.0.ttf') format('truetype'),
+       url('https://fonts.maateen.me/solaiman-lipi/solaimanlipi-bold-v1.0.woff2') format('woff2'),
+       url('https://fonts.maateen.me/solaiman-lipi/solaimanlipi-bold-v1.0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SolaimanLipi';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/solaimanlipi-normal-v1.0.woff2') format('woff2'),
+       url('/fonts/solaimanlipi-normal-v1.0.ttf') format('truetype'),
+       url('https://fonts.maateen.me/solaiman-lipi/solaimanlipi-normal-v1.0.woff2') format('woff2'),
+       url('https://fonts.maateen.me/solaiman-lipi/solaimanlipi-normal-v1.0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SolaimanLipi';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 100;
+  src: url('/fonts/solaimanlipi-thin-v1.0.woff2') format('woff2'),
+       url('/fonts/solaimanlipi-thin-v1.0.ttf') format('truetype'),
+       url('https://fonts.maateen.me/solaiman-lipi/solaimanlipi-thin-v1.0.woff2') format('woff2'),
+       url('https://fonts.maateen.me/solaiman-lipi/solaimanlipi-thin-v1.0.ttf') format('truetype');
+}
+
+@theme {
+  --breakpoint-xs: 440px;
+  --font-sans: 'SolaimanLipi', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@layer base {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    font-family: 'SolaimanLipi', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+  }
+
+  /* ALL Headings across website use SolaimanLipi with bold weight */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'SolaimanLipi', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: normal;
+  }
+
+  button, input, textarea, select {
+    font-family: inherit;
+  }
+}
+
+/* SolaimanLipi font utilities */
+.font-solaiman-lipi {
+  font-family: 'SolaimanLipi', sans-serif !important;
+}
+
+.font-solaiman-lipi-bold {
+  font-family: 'SolaimanLipi', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+/* All website general Bangla typography defaults to SolaimanLipi */
+.font-bengali-body,
+.font-bengali-heading,
+.font-bengali-stylish {
+  font-family: 'SolaimanLipi', sans-serif;
+}
+
+.font-script {
+  font-family: 'Caveat', 'Kalam', 'Dancing Script', cursive !important;
+}
+
+/* EXCLUDED FROM SOLAIMANLIPI: Hero typing animation title element retains its stylish Anek Bangla font */
+.font-hero-typing,
+#home h1 > span:first-child,
+div#root > div > main > section#home h1 > span:first-child {
+  font-family: 'Anek Bangla', 'Hind Siliguri', sans-serif !important;
+}
+
+/* Custom smooth scroll offset for fixed header */
+html {
+  scroll-padding-top: 80px;
+}
+
