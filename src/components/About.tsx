@@ -29,14 +29,13 @@ import { Language, translations } from './translations';
 
 interface AboutProps {
   onDownloadCV: () => void;
-  onReplaceAboutPhoto: () => void;
+  onReplaceAboutPhoto?: () => void;
   customAboutImage?: string | null;
   language: Language;
 }
 
 export const About: React.FC<AboutProps> = ({
   onDownloadCV,
-  onReplaceAboutPhoto,
   customAboutImage,
   language,
 }) => {
@@ -225,7 +224,6 @@ export const About: React.FC<AboutProps> = ({
             <div className="w-full max-w-md">
               <AboutPharmacistVisual
                 customImage={customAboutImage}
-                onReplaceClick={onReplaceAboutPhoto}
                 className="w-full"
               />
               {/* Quick Info Box underneath image */}

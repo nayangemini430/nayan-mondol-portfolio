@@ -21,11 +21,9 @@ import {
   ProjectDetailModal,
   ServiceDetailModal,
   LocationModal,
-  PhotoModal,
 } from './components/Modals';
 import { ServiceItem, PortfolioItem } from './components/types';
 import { Language } from './components/translations';
-import { safeLocalStorageSetItem } from './utils/storage';
 
 type PageId = 'home' | 'about' | 'services' | 'portfolio' | 'blog' | 'contact';
 
@@ -47,15 +45,6 @@ export default function App() {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
-  const [photoModalConfig, setPhotoModalConfig] = useState<{
-    isOpen: boolean;
-    target: string;
-    title?: string;
-  }>({
-    isOpen: false,
-    target: 'hero',
-    title: '',
-  });
 
   const [customHeroImage, setCustomHeroImage] = useState<string | null>(() => {
     return localStorage.getItem('nm_hero_image') || null;
@@ -96,32 +85,6 @@ export default function App() {
     }
   };
 
-  const handleSetImage = (target: string, dataUrl: string | null) => {
-    if (target === 'hero') {
-      setCustomHeroImage(dataUrl);
-      if (dataUrl) safeLocalStorageSetItem('nm_hero_image', dataUrl);
-      else {
-        try { localStorage.removeItem('nm_hero_image'); } catch {}
-      }
-    } else if (target === 'about') {
-      setCustomAboutImage(dataUrl);
-      if (dataUrl) safeLocalStorageSetItem('nm_about_image', dataUrl);
-      else {
-        try { localStorage.removeItem('nm_about_image'); } catch {}
-      }
-    } else {
-      setPortfolioImages((prev) => {
-        const next = { ...prev };
-        if (dataUrl) {
-          next[target] = dataUrl;
-        } else {
-          delete next[target];
-        }
-        safeLocalStorageSetItem('nm_portfolio_images', JSON.stringify(next));
-        return next;
-      });
-    }
-  };
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-800 antialiased font-sans">
@@ -145,9 +108,6 @@ export default function App() {
               customHeroImage={customHeroImage}
               onViewWorkClick={() => navigateToPage('portfolio')}
               onAboutClick={() => navigateToPage('about')}
-              onReplaceHeroPhoto={() =>
-                setPhotoModalConfig({ isOpen: true, target: 'hero' })
-              }
             />
 
             {/* Pharmacy Sales & Retail Specialist Rich Features Section */}
@@ -181,9 +141,6 @@ export default function App() {
               language={language}
               customAboutImage={customAboutImage}
               onDownloadCV={() => setIsCVModalOpen(true)}
-              onReplaceAboutPhoto={() =>
-                setPhotoModalConfig({ isOpen: true, target: 'about' })
-              }
             />
             <PageQuickNav
               currentPage={currentPage}
@@ -236,17 +193,6 @@ export default function App() {
             <Portfolio
               language={language}
               customImages={portfolioImages}
-              onCustomizeImage={(projectId) => {
-                const targetProject = portfolioData.find((p) => p.id === projectId);
-                setPhotoModalConfig({
-                  isOpen: true,
-                  target: projectId,
-                  title:
-                    language === 'bn'
-                      ? `${targetProject?.title || 'প্রকল্প'} - ছবি পরিবর্তন`
-                      : `Change Photo - ${targetProject?.title || 'Project'}`,
-                });
-              }}
               onSelectProject={(item) => setSelectedProject(item)}
               onViewMoreProjects={() => {
                 setSelectedProject({
@@ -368,15 +314,7 @@ export default function App() {
         onClose={() => setIsLocationModalOpen(false)}
       />
 
-      <PhotoModal
-        isOpen={photoModalConfig.isOpen}
-        target={photoModalConfig.target}
-        targetTitle={photoModalConfig.title}
-        onClose={() =>
-          setPhotoModalConfig((prev) => ({ ...prev, isOpen: false }))
-        }
-        onSetImage={handleSetImage}
-      />
+
     </div>
   );
 }

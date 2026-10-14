@@ -6,7 +6,7 @@ import { Language, translations } from './translations';
 interface HeroProps {
   onViewWorkClick: () => void;
   onAboutClick: () => void;
-  onReplaceHeroPhoto: () => void;
+  onReplaceHeroPhoto?: () => void;
   customHeroImage?: string | null;
   language: Language;
 }
@@ -14,7 +14,6 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({
   onViewWorkClick,
   onAboutClick,
-  onReplaceHeroPhoto,
   customHeroImage,
   language,
 }) => {
@@ -204,7 +203,6 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
             <HeroPharmacistVisual
               customImage={customHeroImage}
-              onReplaceClick={onReplaceHeroPhoto}
               className="w-full"
             />
           </div>

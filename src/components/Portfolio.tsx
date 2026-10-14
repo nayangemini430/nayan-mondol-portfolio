@@ -132,22 +132,6 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                 {/* Image Area */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                   {renderVisual(rawProject)}
-
-                  {/* Quick Change / Customize Photo Button */}
-                  {onCustomizeImage && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onCustomizeImage(rawProject.id);
-                      }}
-                      type="button"
-                      title={language === 'bn' ? 'ছবি পরিবর্তন বা আপলোড করুন' : 'Change project photo'}
-                      className="absolute top-2.5 right-2.5 z-10 bg-white/90 hover:bg-white text-slate-800 hover:text-sky-700 text-[11px] font-semibold px-2.5 py-1 rounded-md shadow-md border border-slate-200/90 transition-all flex items-center gap-1.5 backdrop-blur-sm opacity-90 hover:opacity-100 hover:scale-105 active:scale-95"
-                    >
-                      <Camera className="w-3.5 h-3.5 text-sky-600" />
-                      <span>{language === 'bn' ? 'ছবি পরিবর্তন' : 'Change'}</span>
-                    </button>
-                  )}
                 </div>
 
                 {/* Card Body */}
